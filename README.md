@@ -10,6 +10,11 @@ CopyPad saves anything you copy so you can find it later.
 - Similar to the floating clipboard history that comes with Windows
 - Click the :gear: -> "Keyboard Shortcuts" to configure it
 
+### FOATING WINDOW
+- CopyPad can display itself as a floating window (like SpotLight search)
+- it will reveal itself when the key combination that you configured is pressed
+- it will disapear if you click anywhere else, or if you press the escape key
+
 ### TEXT SEARCH:
 - Fast text search of all items in CopyPad
 
