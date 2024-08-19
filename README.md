@@ -3,6 +3,7 @@ A clipboard history app for macOS. Inspired by the clipboard history app on Wind
 
 CopyPad saves anything you copy so you can find it later. It does not persist any data between computer restarts.
 
+
 ## FEATURES:
 
 ### KEYBOARD SHORTCUTS:
@@ -27,3 +28,6 @@ CopyPad saves anything you copy so you can find it later. It does not persist an
 ### APP RESTRICTIONS:
 - Restrict CopyPad from saving anything from any app installed on your Mac, like password managers
 - Click the :gear: -> "App Restrictions" to configure it
+
+#### [App Store Link](https://apps.apple.com/us/app/copypad/id6447533832?mt=12)
+CopyPad is free, but if you want automatic updates, you can get it from the [app store](https://apps.apple.com/us/app/copypad/id6447533832?mt=12).
