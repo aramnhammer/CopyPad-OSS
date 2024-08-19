@@ -1,4 +1,4 @@
-# CopyPad-OSS
+# CopyPad
 A clipboard history app for macOS. Inspired by the clipboard history app on Windows (one of the few things they got right)
 
 CopyPad saves anything you copy so you can find it later.
