@@ -1,7 +1,7 @@
 # CopyPad
 A clipboard history app for macOS. Inspired by the clipboard history app on Windows (one of the few things they got right)
 
-CopyPad saves anything you copy so you can find it later. It does not persist any data between computer restarts.
+CopyPad saves anything you copy so you can find it later. It does not persist any coppied items between computer restarts.
 
 
 ## FEATURES:
