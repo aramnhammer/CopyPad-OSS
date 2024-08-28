@@ -335,13 +335,12 @@ struct CopyPadView: View {
     @ObservedObject var permissionsService: Permissions
     @ObservedObject var appRestrictions: ApplicationRestrictionController
     @Environment(\.colorScheme) var colorScheme
+
     @State var showAppRestrictionsView: Bool = false
     @State var showingPanel = false
     @State var showingKBSettings = false
     @State var showFloatingWindow = false
     @State var showThirdPartySoftware = false
-    
-    
     let restartFunc: ()->()
     
     init(itemsView: ObservableItemList,
@@ -483,7 +482,10 @@ struct CopyPadView: View {
                                     .buttonStyle(SettingsContextMenuButtonStyle())
                                     Button("Third Party Software") {
                                         self.showThirdPartySoftware.toggle()
-                                        
+                                    }
+                                    .buttonStyle(SettingsContextMenuButtonStyle())
+                                    Button("Tutorial") {
+                                        openWindow(id: "tutorialWindowName")
                                     }
                                     .buttonStyle(SettingsContextMenuButtonStyle())
                                     Text("\(appVersion ?? "0.0").\(appBuild ?? "##")")
@@ -589,6 +591,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector:#selector(HideFloatingWindow(_:)),name: .escKeyPressed, object: nil)
         self.app?.registerFloatingViewShortCut()
         HideFloatingWindow(nil)
+        
     }
     
     // impl objc func to close the floating window when we hit esc
@@ -611,6 +614,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.start()
         permissionsEnabled = Permissions.getAccessibilityPermissions()
         self.configureFloatingWindowBehavior()
+        for w in NSApp.windows{
+            print(w.identifier?.rawValue)
+        }
     }
     
     func applicationDidResignActive(_ notification: Notification) {
@@ -633,7 +639,9 @@ struct SceneController: Scene {
     @SceneBuilder var body: some Scene {
         MenuBarExtra("", image:"MenuBar") {
             self.menuBarView
-        }.menuBarExtraStyle(.window)
+        }
+        .menuBarExtraStyle(.window)
+        
         
         Window("FloatingWindow", id: floatingWindowName) {
             self.menuBarView
@@ -648,6 +656,10 @@ struct SceneController: Scene {
         }
         .windowResizability(.contentSize)
         .windowStyle(.hiddenTitleBar)
+        Window("Tutorial", id: "tutorialWindowName"){
+            GIFSlideshowView()
+        }
+
     }
 }
 
