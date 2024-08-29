@@ -657,8 +657,9 @@ struct SceneController: Scene {
         .windowResizability(.contentSize)
         .windowStyle(.hiddenTitleBar)
         Window("Tutorial", id: "tutorialWindowName"){
-            GIFSlideshowView()
+            FeatureTutorialsView()
         }
+        .windowResizability(.contentSize)
 
     }
 }
