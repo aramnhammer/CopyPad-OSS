@@ -440,7 +440,11 @@ struct CopyPadView: View {
                         ZStack{
                             HStack{
                                 VStack(spacing: 0){
-                                    Button("Floating Window") {
+                                    Button("Feature Demos") {
+                                        openWindow(id: "tutorialWindowName")
+                                    }
+                                    .buttonStyle(SettingsContextMenuButtonStyle())
+                                    Button("Reveal Floating Window") {
                                         NSApplication.shared.activate(ignoringOtherApps: true)
                                         openWindow(id: floatingWindowName)
                                     }
@@ -482,10 +486,6 @@ struct CopyPadView: View {
                                     .buttonStyle(SettingsContextMenuButtonStyle())
                                     Button("Third Party Software") {
                                         self.showThirdPartySoftware.toggle()
-                                    }
-                                    .buttonStyle(SettingsContextMenuButtonStyle())
-                                    Button("Tutorial") {
-                                        openWindow(id: "tutorialWindowName")
                                     }
                                     .buttonStyle(SettingsContextMenuButtonStyle())
                                     Text("\(appVersion ?? "0.0").\(appBuild ?? "##")")

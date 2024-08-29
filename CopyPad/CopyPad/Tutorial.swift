@@ -32,7 +32,10 @@ struct NavViewButtonStyle: ButtonStyle {
                 .foregroundColor(.primary)
                 .padding(.horizontal, 2)
                 .padding(.vertical, 2)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(minWidth: 180.0,
+                       idealWidth: 180.0,
+                       maxWidth: 200.0,
+                       alignment: .leading)
                 .contentShape(Rectangle())
                 .background(configuration.isPressed ? Color.blue : (isSelected ? Color.blue : (hovered ? Color(.systemBlue) : Color.clear)))
 
@@ -78,7 +81,7 @@ struct FeatureTutorialsView: View {
                         
                     }
                     .listStyle(SidebarListStyle())
-                    .frame(minWidth: 100, maxWidth: 300)
+                    .frame(minWidth: 50, maxWidth: 300)
                 }
                 Spacer()
             }
@@ -105,12 +108,13 @@ struct FeatureView: View {
         VStack{
             Text(title).font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
             Text(description).font(.subheadline)
-        }
-        HStack{
-            GIFImageView(gifName: $gifName)
-                        .frame(width: 800, height: 600)
-                        .cornerRadius(5)
-                        .shadow(radius: 8)
+            Divider()
+            HStack{
+                GIFImageView(gifName: $gifName)
+                            .frame(width: 800, height: 600)
+                            .cornerRadius(5)
+                            .shadow(radius: 8)
+            }
         }
     }
 }
