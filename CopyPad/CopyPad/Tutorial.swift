@@ -108,8 +108,8 @@ struct FeatureView: View {
         }
         HStack{
             GIFImageView(gifName: $gifName)
-                        .frame(width: 300, height: 300)
-                        .cornerRadius(12)
+                        .frame(width: 800, height: 600)
+                        .cornerRadius(5)
                         .shadow(radius: 8)
         }
     }

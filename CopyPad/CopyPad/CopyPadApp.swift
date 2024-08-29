@@ -659,7 +659,7 @@ struct SceneController: Scene {
         Window("Tutorial", id: "tutorialWindowName"){
             FeatureTutorialsView()
         }
-        .windowResizability(.contentSize)
+        .windowResizability(.automatic)
 
     }
 }
