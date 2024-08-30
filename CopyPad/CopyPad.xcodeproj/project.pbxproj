@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		244BFDEC2C7E376000407B83 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244BFDEB2C7E376000407B83 /* Tutorial.swift */; };
+		244BFDEC2C7E376000407B83 /* FeatureShowcase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244BFDEB2C7E376000407B83 /* FeatureShowcase.swift */; };
 		247B50502C73F392002FC8D2 /* CopyPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247B504F2C73F392002FC8D2 /* CopyPadApp.swift */; };
 		247B50542C73F394002FC8D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247B50532C73F394002FC8D2 /* Assets.xcassets */; };
 		247B50572C73F394002FC8D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247B50562C73F394002FC8D2 /* Preview Assets.xcassets */; };
@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		244BFDEB2C7E376000407B83 /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
+		244BFDEB2C7E376000407B83 /* FeatureShowcase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureShowcase.swift; sourceTree = "<group>"; };
 		247B504C2C73F392002FC8D2 /* CopyPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		247B504F2C73F392002FC8D2 /* CopyPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyPadApp.swift; sourceTree = "<group>"; };
 		247B50532C73F394002FC8D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 				247B50652C73FEF0002FC8D2 /* AppPermissions.swift */,
 				247B50672C73FF74002FC8D2 /* AppRestrictions.swift */,
 				247B506B2C740174002FC8D2 /* CopyPadKeyboardShortcut.swift */,
-				244BFDEB2C7E376000407B83 /* Tutorial.swift */,
+				244BFDEB2C7E376000407B83 /* FeatureShowcase.swift */,
 				247B50532C73F394002FC8D2 /* Assets.xcassets */,
 				247B50582C73F394002FC8D2 /* CopyPad.entitlements */,
 				247B50552C73F394002FC8D2 /* Preview Content */,
@@ -167,7 +167,7 @@
 				247B50642C73FC68002FC8D2 /* LaunchOnLogin.swift in Sources */,
 				247B50682C73FF74002FC8D2 /* AppRestrictions.swift in Sources */,
 				247B505F2C73F4F9002FC8D2 /* Card.swift in Sources */,
-				244BFDEC2C7E376000407B83 /* Tutorial.swift in Sources */,
+				244BFDEC2C7E376000407B83 /* FeatureShowcase.swift in Sources */,
 				247B506C2C740174002FC8D2 /* CopyPadKeyboardShortcut.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

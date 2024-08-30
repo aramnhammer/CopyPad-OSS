@@ -625,9 +625,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.start()
         permissionsEnabled = Permissions.getAccessibilityPermissions()
         self.configureFloatingWindowBehavior()
-        for w in NSApp.windows{
-            print(w.identifier?.rawValue)
-        }
+        self.app?.displayShowCaseWindow()
     }
     
     func applicationDidResignActive(_ notification: Notification) {
@@ -702,5 +700,9 @@ struct CopyPad: App {
         }
         NSApplication.shared.windows.first { $0.identifier?.rawValue == floatingWindowName }?.hidesOnDeactivate = true
         NSApplication.shared.windows.first { $0.identifier?.rawValue == floatingWindowName }?.close()
+    }
+    
+    func displayShowCaseWindow(){
+        openWindow(id: tutorialWindowName)
     }
 }
