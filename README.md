@@ -11,6 +11,9 @@ CopyPad saves anything you copy so you can find it later. It does not persist an
 - Similar to the floating clipboard history that comes with Windows
 - Click the :gear: -> "Keyboard Shortcuts" to configure it
 
+![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/keyboardShortcuts.dataset/keyboardShortcuts.gif)
+
+
 ### FOATING WINDOW
 - CopyPad can display itself as a floating window (like SpotLight search)
 - it will reveal itself when the key combination that you configured is pressed
@@ -22,8 +25,14 @@ CopyPad saves anything you copy so you can find it later. It does not persist an
 ### PREVIEWS:
 - Double click an Item to preview. Works with text, images and files. Links are automatically detected and a hyperlink is created
 
+![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/previewMedia.dataset/previewMediaThumbnails.gif)
+
+
 ### PIN IMPORTANT ITEMS:
 - Right click and select "Pin" to pin anything to the top of CopyPad history
+
+![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/pinToTop.dataset/pinToTop.gif)
+
 
 ### APP RESTRICTIONS:
 - Restrict CopyPad from saving anything from any app installed on your Mac, like password managers
