@@ -1,5 +1,5 @@
 //
-//  Tutorial.swift
+// FeatureShowcase.swift
 //  CopyPad
 //
 //  Created by aram on 8/27/24.
