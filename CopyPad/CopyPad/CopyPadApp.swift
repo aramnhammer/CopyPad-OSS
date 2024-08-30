@@ -14,6 +14,7 @@ var observableItemList = ObservableItemList()
 
 // MARK: Constants
 let floatingWindowName = "floatingWindow"
+let tutorialWindowName = "tutorialWindowName"
 let appVersion = Bundle.main.releaseVersionNumber
 let appBuild = Bundle.main.buildVersionNumber
 
@@ -210,11 +211,21 @@ class ObservableItemList : ObservableObject {
     func insertItem(item: Item){
         let existingItem = self.hasItem(item: item)
         if existingItem == nil{
-            let last_pinned_idx = getLastPinnedPos()
+            let last_pinned_idx = 	getLastPinnedPos()
             if last_pinned_idx == nil {
                 self.items.insert(item, at: 0)
             } else {
                 self.items.insert(item, at: last_pinned_idx! + 1)
+            }
+        }else{
+            let last_pinned_idx = getLastPinnedPos()
+            guard let idx = self.items.firstIndex(where: { $0.data == item.data }) else { return  }
+            let new_item = Item(alias: item.alias, data: item.data, isPinned: false)
+            self.items.remove(at: idx)
+            if last_pinned_idx == nil{
+                self.items.insert(new_item, at: 0)
+            }else{
+                self.items.insert(new_item, at: last_pinned_idx! + 1)
             }
         }
     }
@@ -441,7 +452,7 @@ struct CopyPadView: View {
                             HStack{
                                 VStack(spacing: 0){
                                     Button("Feature Demos") {
-                                        openWindow(id: "tutorialWindowName")
+                                        openWindow(id: tutorialWindowName)
                                     }
                                     .buttonStyle(SettingsContextMenuButtonStyle())
                                     Button("Reveal Floating Window") {
@@ -656,7 +667,7 @@ struct SceneController: Scene {
         }
         .windowResizability(.contentSize)
         .windowStyle(.hiddenTitleBar)
-        Window("Tutorial", id: "tutorialWindowName"){
+        Window("Showcase", id: tutorialWindowName){
             FeatureTutorialsView()
         }
         .windowResizability(.automatic)

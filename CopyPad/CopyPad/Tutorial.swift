@@ -57,10 +57,8 @@ struct NavViewButtonStyle: ButtonStyle {
 
 
 struct FeatureTutorialsView: View {
-    // List of GIF names and their titles
     @State private var selectedIndex: Int = 0
     @State var currentFeature: (title: String, gifName: String, description: String) = gifs[0]
-    @State private var isButtonSelected = false
 
 
     var body: some View {
