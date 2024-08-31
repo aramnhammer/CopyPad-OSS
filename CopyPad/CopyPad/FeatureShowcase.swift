@@ -18,7 +18,7 @@ let gifs: [(title: String, gifName: String, description: String)] = [
     (title: "Previews", gifName: "previewMedia",
     description: "Double click an item to see its preview."),
     (title: "Configure Keyboard Shortcuts", gifName: "keyboardShortcuts",
-     description: "In the Settings menue ('gear' button at the bottom, select 'Keyboard Shortcut' to configure a keyboard shortcut which will trigger the floating window to appear"),
+     description: "In the Settings menue ('⚙️' button at the bottom, select 'Keyboard Shortcut' to configure a keyboard shortcut which will trigger the floating window to appear"),
     (title: "Rename an Alias", gifName: "renameAlias", description: "In CopyPad, every coppied item can have an 'alias', to better identify it, from the preview menu you can change this alias to be anything without actually changing the value you previously coppied.")
 ]
 
@@ -30,10 +30,8 @@ struct NavViewButtonStyle: ButtonStyle {
         VStack {
             configuration.label
                 .foregroundColor(.primary)
-                .padding(.horizontal, 2)
-                .padding(.vertical, 2)
-                .frame(minWidth: 180.0,
-                       idealWidth: 180.0,
+                .frame(minWidth: 160.0,
+                       idealWidth: 160.0,
                        maxWidth: 200.0,
                        alignment: .leading)
                 .contentShape(Rectangle())
@@ -43,11 +41,12 @@ struct NavViewButtonStyle: ButtonStyle {
                     self.hovered = isHovered
                 }
                 .animation(.default, value: hovered)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .font(.callout)
-                .cornerRadius(1)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .font(.headline)
+                .cornerRadius(2)
+                .padding(.all)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.gray.opacity(0.3), lineWidth: 2) // Outline color and width
                 )
         }
@@ -65,22 +64,28 @@ struct FeatureTutorialsView: View {
         HStack {
             // Titles column
             VStack(alignment: .leading) {
-                Text("CopyPad Features")
-                NavigationStack{
+                NavigationStack
+                {
+                    
                     List(0..<gifs.count, id: \.self){index in
-                                                Button(gifs[index].title, action: {
-                                                    currentFeature = gifs[index]
-                                                    selectedIndex = index
-
+                        Button(action:{
+                            currentFeature = gifs[index]
+                            selectedIndex = index
+                        }) {
+                                                    HStack{
+                                                        Spacer()
+                                                        Text(gifs[index].title)
+                                                        Spacer()
+                                                    }
                         
-                                                }).buttonStyle(
+                                                }.buttonStyle(
                                                     NavViewButtonStyle(isSelected: .constant(selectedIndex == index))
                                                 )
                         
                     }
                     .listStyle(SidebarListStyle())
-                    .frame(minWidth: 50, maxWidth: 300)
                 }
+                .navigationTitle(.constant("CopyPad Features"))
                 Spacer()
             }
             .padding()
@@ -89,6 +94,8 @@ struct FeatureTutorialsView: View {
             VStack {
                 FeatureView(title: $currentFeature.title, description: $currentFeature.description,
                             gifName: $currentFeature.gifName)
+                .padding()
+                .padding()
                 Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -109,9 +116,9 @@ struct FeatureView: View {
             Divider()
             HStack{
                 GIFImageView(gifName: $gifName)
-                            .frame(width: 800, height: 600)
-                            .cornerRadius(5)
-                            .shadow(radius: 8)
+//                            .frame(width: 800, height: 600)
+//                            .cornerRadius(5)
+//                            .shadow(radius: 8)
             }
         }
     }
@@ -135,6 +142,7 @@ struct GIFImageView: NSViewRepresentable {
         imageView.animates = true
         imageView.imageScaling = .scaleProportionallyUpOrDown
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        image?.resizingMode = .stretch
         
         view.addSubview(imageView)
         

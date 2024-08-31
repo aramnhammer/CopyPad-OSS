@@ -668,7 +668,7 @@ struct SceneController: Scene {
         Window("Showcase", id: tutorialWindowName){
             FeatureTutorialsView()
         }
-        .windowResizability(.automatic)
+        .windowResizability(.contentSize)
 
     }
 }
