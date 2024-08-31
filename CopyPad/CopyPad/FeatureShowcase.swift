@@ -116,9 +116,6 @@ struct FeatureView: View {
             Divider()
             HStack{
                 GIFImageView(gifName: $gifName)
-//                            .frame(width: 800, height: 600)
-//                            .cornerRadius(5)
-//                            .shadow(radius: 8)
             }
         }
     }
@@ -130,12 +127,9 @@ struct GIFImageView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
-//        let gifURL = Bundle.main.url(forResource: gifName, withExtension: "")!
         let asset = NSDataAsset(name: gifName)
-               //return UIImage.gif(data: asset.data)
         let imageView = NSImageView()
         
-        //let gifData = Data(contentsOf: asset.data)
         let image = NSImage(data: asset!.data)
         
         imageView.image = image
