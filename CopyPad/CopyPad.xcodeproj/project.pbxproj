@@ -20,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2419F9F12C882D93007E93EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		244BFDEB2C7E376000407B83 /* FeatureShowcase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureShowcase.swift; sourceTree = "<group>"; };
 		247B504C2C73F392002FC8D2 /* CopyPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyPad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		247B504F2C73F392002FC8D2 /* CopyPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyPadApp.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		247B504E2C73F392002FC8D2 /* CopyPad */ = {
 			isa = PBXGroup;
 			children = (
+				2419F9F12C882D93007E93EC /* Info.plist */,
 				247B505E2C73F4F9002FC8D2 /* Card.swift */,
 				247B504F2C73F392002FC8D2 /* CopyPadApp.swift */,
 				247B50632C73FC68002FC8D2 /* LaunchOnLogin.swift */,
@@ -307,6 +309,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CopyPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CopyPad;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -336,6 +339,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CopyPad/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CopyPad;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
