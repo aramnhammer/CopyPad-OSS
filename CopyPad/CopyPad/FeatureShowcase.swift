@@ -18,7 +18,7 @@ let gifs: [(title: String, gifName: String, description: String)] = [
     (title: "Previews", gifName: "previewMedia",
     description: "Double click an item to see its preview."),
     (title: "Keyboard Shortcuts", gifName: "keyboardShortcuts",
-     description: "In the Settings menue ('⚙️' button at the bottom) select 'Keyboard Shortcut' to configure a keyboard shortcut which will trigger the floating window to appear"),
+     description: "In the Settings menu ('⚙️' button at the bottom) select 'Keyboard Shortcut' to configure a keyboard shortcut which will trigger the floating window to appear"),
     (title: "Rename an Alias", gifName: "renameAlias", description: "In CopyPad, every coppied item can have an 'alias', to better identify it, from the preview menu you can change this alias to be anything without actually changing the value you previously coppied.")
 ]
 
