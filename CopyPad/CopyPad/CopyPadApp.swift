@@ -90,7 +90,8 @@ struct Item: Identifiable{
             
         case NSPasteboard.PasteboardType.string:
             if self.alias == "N/A" {
-                self.alias = String(decoding: data, as: UTF8.self).truncate(to: 50).trimmingCharacters(in: .newlines).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\t", with: "")
+                self.alias = String(decoding: data, as: UTF8.self)
+                    .truncate(to: 50)
             }else if self.alias == ""{
                 self.MediaCoppied()
             }
