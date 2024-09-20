@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/AppIcon.appiconset/icon_64.png" />
+</p>
+
 # CopyPad
 A clipboard history app for macOS. Inspired by the clipboard history app on Windows (one of the few things they got right)
 
@@ -11,7 +15,7 @@ CopyPad saves anything you copy so you can find it later. It does not persist an
 - Similar to the floating clipboard history that comes with Windows
 - Click the :gear: -> "Keyboard Shortcuts" to configure it
 
-![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/keyboardShortcuts.dataset/keyboardShortcuts.gif)
+![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/keyboardShortcuts.dataset/resized_keyboardShortcuts.gif)
 
 
 ### FOATING WINDOW
@@ -25,13 +29,13 @@ CopyPad saves anything you copy so you can find it later. It does not persist an
 ### PREVIEWS:
 - Double click an Item to preview. Works with text, images and files. Links are automatically detected and a hyperlink is created
 
-![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/previewMedia.dataset/previewMediaThumbnails.gif)
+![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/previewMedia.dataset/resized_previewMediaThumbnails.gif)
 
 
 ### PIN IMPORTANT ITEMS:
 - Right click and select "Pin" to pin anything to the top of CopyPad history
 
-![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/pinToTop.dataset/pinToTop.gif)
+![](https://github.com/aramnhammer/CopyPad-OSS/blob/main/CopyPad/CopyPad/Assets.xcassets/pinToTop.dataset/resized_pinToTop.gif)
 
 
 ### APP RESTRICTIONS:

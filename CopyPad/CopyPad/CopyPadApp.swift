@@ -90,7 +90,8 @@ struct Item: Identifiable{
             
         case NSPasteboard.PasteboardType.string:
             if self.alias == "N/A" {
-                self.alias = String(decoding: data, as: UTF8.self).truncate(to: 50).trimmingCharacters(in: .newlines).replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\t", with: "")
+                self.alias = String(decoding: data, as: UTF8.self)
+                    .truncate(to: 50)
             }else if self.alias == ""{
                 self.MediaCoppied()
             }
@@ -163,6 +164,12 @@ struct Item: Identifiable{
     }
 }
 
+struct MemReport {
+    let sz: Double
+    let fmt_sz: String
+    let count: Int
+}
+
 class ObservableItemList : ObservableObject {
     @Published var items = [Item]()
     private let clipBoard = NSPasteboard.general
@@ -190,10 +197,13 @@ class ObservableItemList : ObservableObject {
     var changeCount = 0
     private var timer: Timer!
     private var mem_size_timer: Timer!
+    @Published var footprint: MemReport = MemReport(sz: 0.0, fmt_sz: "", count: 0)
     
     init(){
         self.changeCount = self.clipBoard.changeCount
         self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(self.pollPasteBoard(_:)), userInfo: nil, repeats: true)
+        self.mem_size_timer = Timer.scheduledTimer(timeInterval: TimeInterval(5), target: self, selector: #selector(self.sz(_:)), userInfo: nil, repeats: true)
+
     }
     
     func reloadRestrictedURLS() {
@@ -288,6 +298,45 @@ class ObservableItemList : ObservableObject {
         clipBoard.clearContents()
         self.changeCount = self.clipBoard.changeCount
         items.removeAll(where: {!$0.isPinned})
+    }
+    
+    @objc func sz(_ sender: Any){
+        let sz = self.formattedMemoryFootprint()
+        if sz.sz > 2 * 1024 * 1024 * 1024 {
+            //print("Mem: \(sz.fmt_sz)")
+//            var _ = self.items.popLast()
+            
+        }
+//        if self.items.count >= 10000 {
+//            var _ = self.items.popLast()
+//        }
+        
+    }
+    func memoryFootprint() -> Float? {
+        let TASK_VM_INFO_COUNT = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
+        let TASK_VM_INFO_REV1_COUNT = mach_msg_type_number_t(MemoryLayout.offset(of: \task_vm_info_data_t.min_address)! / MemoryLayout<integer_t>.size)
+        var info = task_vm_info_data_t()
+        var count = TASK_VM_INFO_COUNT
+        let kr = withUnsafeMutablePointer(to: &info) { infoPtr in
+            infoPtr.withMemoryRebound(to: integer_t.self, capacity: Int(count)) { intPtr in
+                task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), intPtr, &count)
+            }
+        }
+        guard
+            kr == KERN_SUCCESS,
+            count >= TASK_VM_INFO_REV1_COUNT
+        else { return nil }
+        
+        let usedBytes = Float(info.phys_footprint)
+        return usedBytes
+        
+    }
+    
+    func formattedMemoryFootprint() -> MemReport {
+        let usedBytes: UInt64? = UInt64(self.memoryFootprint() ?? 0)
+        let usedMB = Double(usedBytes ?? 0) / 1024 / 1024
+        self.footprint = MemReport(sz: usedMB, fmt_sz: "\(round(usedMB))", count: self.items.count)
+        return self.footprint
     }
     
     func togglePinning(item: Item) {
@@ -499,8 +548,13 @@ struct CopyPadView: View {
                                         self.showThirdPartySoftware.toggle()
                                     }
                                     .buttonStyle(SettingsContextMenuButtonStyle())
-                                    Text("\(appVersion ?? "0.0").\(appBuild ?? "##")")
-                                        .font(.footnote)
+                                    Divider()
+                                    
+                                    Text("v\(appVersion ?? "0.0").\(appBuild ?? "##")")
+                                        .font(.footnote).padding(.top)
+                                    Text("Using: \(self.itemsView.footprint.fmt_sz) MB").font(.footnote)
+                                    Text("\(self.itemsView.footprint.count) Items").font(.footnote)
+
                                 }
                             }.padding(10)
                         
@@ -668,7 +722,8 @@ struct SceneController: Scene {
         Window("Showcase", id: tutorialWindowName){
             FeatureTutorialsView()
         }
-        .windowResizability(.automatic)
+        .windowStyle(.titleBar)
+        .windowResizability(.contentSize)
 
     }
 }
