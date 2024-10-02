@@ -302,15 +302,9 @@ class ObservableItemList : ObservableObject {
     
     @objc func sz(_ sender: Any){
         let sz = self.formattedMemoryFootprint()
-        if sz.sz > 2 * 1024 * 1024 * 1024 {
-            //print("Mem: \(sz.fmt_sz)")
-//            var _ = self.items.popLast()
-            
+        if sz.sz > 500 * 1024 * 1024 {
+            self.items.popLast()
         }
-//        if self.items.count >= 10000 {
-//            var _ = self.items.popLast()
-//        }
-        
     }
     func memoryFootprint() -> Float? {
         let TASK_VM_INFO_COUNT = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
