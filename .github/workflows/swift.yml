@@ -23,7 +23,7 @@ jobs:
         
     - name: Build Release
       run: |
-        xcodebuild -project CopyPad.xcodeproj \
+        xcodebuild -project CopyPad/CopyPad.xcodeproj \
           -scheme CopyPad \
           -configuration Release \
           -derivedDataPath build \
