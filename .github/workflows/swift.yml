@@ -2,7 +2,7 @@ name: Build CopyPad
 
 on:
   push:
-    branches: [ main, release ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
   release:
@@ -21,26 +21,20 @@ jobs:
       with:
         xcode-version: latest-stable
         
-    - name: Cache Swift packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          .build
-          ~/Library/Caches/org.swift.swiftpm
-        key: ${{ runner.os }}-swift-${{ hashFiles('Package.swift') }}
-        restore-keys: |
-          ${{ runner.os }}-swift-
-          
     - name: Build Release
       run: |
-        swift build -c release
+        xcodebuild -project CopyPad.xcodeproj \
+          -scheme CopyPad \
+          -configuration Release \
+          -derivedDataPath build \
+          build
         
     - name: Package Binary
       run: |
         mkdir -p artifacts
-        cp .build/release/CopyPad artifacts/
-        # Create archive
-        tar -czf artifacts/CopyPad-${{ github.sha }}.tar.gz -C .build/release CopyPad
+        cp build/Build/Products/Release/CopyPad.app/Contents/MacOS/CopyPad artifacts/
+        # Create archive with the app bundle
+        tar -czf artifacts/CopyPad-${{ github.sha }}.tar.gz -C build/Build/Products/Release CopyPad.app
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
@@ -49,7 +43,6 @@ jobs:
         path: artifacts/
         retention-days: 30
         
-    # # Upload to release if this is a release event
     # - name: Upload to Release
     #   if: github.event_name == 'release'
     #   uses: actions/upload-release-asset@v1
