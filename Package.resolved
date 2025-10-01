@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "keyboardshortcuts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aramnhammer/KeyboardShortcuts",
+      "state" : {
+        "revision" : "2a9f9770be515df75b8f2c708c6f01f684b7a46e",
+        "version" : "2.4.1"
+      }
+    }
+  ],
+  "version" : 2
+}

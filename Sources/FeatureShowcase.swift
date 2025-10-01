@@ -120,16 +120,7 @@ struct GIFImageView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
-        let asset = NSDataAsset(name: gifName)
-        let imageView = NSImageView()
-        
-        let image = NSImage(data: asset!.data)
-        
-        imageView.image = image
-        imageView.animates = true
-        imageView.imageScaling = .scaleProportionallyUpOrDown
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        //image?.resizingMode = .stretch
+        let imageView = createImageView()
         
         view.addSubview(imageView)
         
@@ -144,34 +135,95 @@ struct GIFImageView: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
-            // Remove all subviews
-            nsView.subviews.forEach { $0.removeFromSuperview() }
+        // Remove all subviews
+        nsView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // Add the new imageView with updated gifName
+        let imageView = createImageView()
+        nsView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: nsView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: nsView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: nsView.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: nsView.bottomAnchor)
+        ])
+    }
+    
+    private func createImageView() -> NSImageView {
+        let imageView = NSImageView()
+        var imageSet = false
+        
+        // Method 1: Try NSDataAsset first (for Xcode builds)
+        if let asset = NSDataAsset(name: gifName),
+           let image = NSImage(data: asset.data) {
+            imageView.image = image
+            imageView.animates = true
+            imageView.imageScaling = .scaleProportionallyUpOrDown
+            imageSet = true
+            print("Loaded GIF using NSDataAsset: \(gifName)")
+        }
+        
+        // Method 2: Try Bundle.module (for Swift Package Manager builds)
+        if !imageSet {
+            // Try finding the resource with the dataset path
+            if let gifURL = Bundle.module.url(forResource: "resized_\(gifName)", withExtension: "gif", subdirectory: "\(gifName).dataset") {
+                if let gifData = try? Data(contentsOf: gifURL),
+                   let image = NSImage(data: gifData) {
+                    imageView.image = image
+                    imageView.animates = true
+                    imageView.imageScaling = .scaleProportionallyUpOrDown
+                    imageSet = true
+                    print("Loaded GIF using Bundle.module path 1: \(gifName)")
+                }
+            }
+        }
+        
+        // Method 3: Try a more direct path as fallback
+        if !imageSet {
+            if let gifURL = Bundle.module.url(forResource: gifName, withExtension: "gif") {
+                if let gifData = try? Data(contentsOf: gifURL),
+                   let image = NSImage(data: gifData) {
+                    imageView.image = image
+                    imageView.animates = true
+                    imageView.imageScaling = .scaleProportionallyUpOrDown
+                    imageSet = true
+                    print("Loaded GIF using Bundle.module path 2: \(gifName)")
+                }
+            }
+        }
+        
+        // Debug: List available resources if image wasn't set
+        if !imageSet {
+            print("Failed to load GIF: \(gifName)")
+            print("Available resources:")
             
-            // Add the new imageView with updated gifName
-            let imageView = createImageView()
-            nsView.addSubview(imageView)
+            // List available resources in main bundle
+            if let resourceURLs = Bundle.main.urls(forResourcesWithExtension: "gif", subdirectory: nil) {
+                print("Main bundle resources:")
+                resourceURLs.forEach { print("- \($0.path)") }
+            }
+            
+            // List available resources in module bundle
+            if let moduleResourceURLs = Bundle.module.urls(forResourcesWithExtension: "gif", subdirectory: nil) {
+                print("Module bundle resources:")
+                moduleResourceURLs.forEach { print("- \($0.path)") }
+            }
+            
+            // Provide a fallback image or label
+            let label = NSTextField(labelWithString: "GIF not found: \(gifName)")
+            label.translatesAutoresizingMaskIntoConstraints = false
+            imageView.addSubview(label)
             
             NSLayoutConstraint.activate([
-                imageView.leadingAnchor.constraint(equalTo: nsView.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: nsView.trailingAnchor),
-                imageView.topAnchor.constraint(equalTo: nsView.topAnchor),
-                imageView.bottomAnchor.constraint(equalTo: nsView.bottomAnchor)
+                label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
             ])
         }
         
-    private func createImageView() -> NSImageView {
-            let imageView = NSImageView()
-            
-            if let asset = NSDataAsset(name: gifName),
-               let image = NSImage(data: asset.data) {
-                imageView.image = image
-                imageView.animates = true
-                imageView.imageScaling = .scaleProportionallyUpOrDown
-            }
-            
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }
 }
 
 struct GIFSlideshowView_Previews: PreviewProvider {

@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "swift",
+     		"label": "Swift Build All - Release",
+     		"detail": "swift build --build-tests",
+     		"args": ["build", "-c", "release"],
+     		"env": {},
+     		"cwd": "${workspaceFolder}",
+     		"group": "build"
+		},
+		        {
+            "type": "swift",
+            "label": "Swift Build All - Debug",
+            "detail": "swift build with debug configuration",
+            "args": ["build", "-c", "debug"],
+            "env": {},
+            "cwd": "${workspaceFolder}",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+	]
+}
