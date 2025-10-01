@@ -7,6 +7,7 @@ import ServiceManagement
 import Cocoa
 import Carbon.HIToolbox
 import KeyboardShortcuts
+import CryptoKit
 
 // MARK: Singletons
 var appRestrictionsController = ApplicationRestrictionController()
@@ -52,6 +53,16 @@ struct Item: Identifiable{
     var thumbNail: NSImage?
     var rawValue: String?
     @State var isPinned: Bool = false
+
+    var contentHash: String {
+        let combinedData = data.values.compactMap { $0 }.reduce(Data()) { result, next in
+            var newResult = result
+            newResult.append(next)
+            return newResult
+        }
+        
+        return SHA256.hash(data: combinedData).compactMap { String(format: "%02x", $0) }.joined()
+    }
     
     mutating func MediaCoppied(){
         let date = Date.now
